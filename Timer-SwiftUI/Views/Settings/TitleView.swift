@@ -10,13 +10,14 @@ import SwiftUI
 
 struct TitleView: View {
     
+    @Binding var selectedColor: Int
     var text: String
     
     var body: some View {
         Text(text)
             .font(.system(size: 15))
             .bold()
-            .foregroundColor(Color("color2"))
+            .foregroundColor(Color("color\(selectedColor)"))
             .brightness(-0.2)
     }
 }

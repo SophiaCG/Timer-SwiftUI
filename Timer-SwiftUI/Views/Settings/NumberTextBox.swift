@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NumberTextBox: View {
     
+    @Binding var selectedColor: Int
     var number: Int
     var text: String
     var width: CGFloat
@@ -28,7 +29,7 @@ struct NumberTextBox: View {
                     .foregroundColor(.white)
             }.background(
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                    .fill(Color("color2"))
+                    .fill(Color("color\(selectedColor)"))
                     .brightness(-0.05)
                     .frame(width: width, height: 120)
             )
@@ -39,9 +40,9 @@ struct NumberTextBox: View {
 struct DurationBox_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 50) {
-            NumberTextBox(number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
-            NumberTextBox(number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
-            NumberTextBox(number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
+            NumberTextBox(selectedColor: .constant(2), number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
+            NumberTextBox(selectedColor: .constant(2), number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
+            NumberTextBox(selectedColor: .constant(2), number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
 
         }
     }
