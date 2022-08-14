@@ -11,7 +11,7 @@ import SwiftUI
 struct NumberTextBox: View {
     
     @Binding var selectedColor: Int
-    var number: Int
+    @Binding var number: String
     var text: String
     var width: CGFloat
     
@@ -19,9 +19,12 @@ struct NumberTextBox: View {
         
         VStack {
             VStack {
-                Text("\(number)")
+                TextField("", text: $number)
                     .font(.system(size: 50))
+                    .multilineTextAlignment(.center)
                     .foregroundColor(.white)
+                    .keyboardType(.decimalPad)
+                    .frame(width: width, height: 60)
                 Text(text)
                     .font(.system(size: 15))
                     .bold()
@@ -40,9 +43,9 @@ struct NumberTextBox: View {
 struct DurationBox_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 50) {
-            NumberTextBox(selectedColor: .constant(2), number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
-            NumberTextBox(selectedColor: .constant(2), number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
-            NumberTextBox(selectedColor: .constant(2), number: 25, text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
+            NumberTextBox(selectedColor: .constant(2), number: .constant("25"), text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
+            NumberTextBox(selectedColor: .constant(2), number: .constant("25"), text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
+            NumberTextBox(selectedColor: .constant(2), number: .constant("25"), text: "POMODORO", width: UIScreen.main.bounds.size.width * 0.3)
 
         }
     }

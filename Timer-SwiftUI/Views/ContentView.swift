@@ -15,6 +15,11 @@ struct ContentView: View {
     @State var startBreaks: Bool = true
     @State var showNotifs: Bool = true
     @State var selectedBox: Int = 1
+    @State var pomodoroNum: String = "25"
+    @State var breakNum: String = "5"
+    @State var longBreakNum: String = "15"
+    @State var pomodoroGoal: String = "14"
+    @State var dailyGoal: String = "8"
     let width = UIScreen.main.bounds.size.width
 
     var body: some View {
@@ -30,20 +35,20 @@ struct ContentView: View {
                     TitleView(selectedColor: $selectedColor, text: "DURATIONS")
                     
                     HStack(spacing: 20) {
-                        NumberTextBox(selectedColor: $selectedColor, number: 25, text: "POMODORO", width: width * 0.28)
-                        NumberTextBox(selectedColor: $selectedColor, number: 5, text: "BREAK", width: width * 0.28)
-                        NumberTextBox(selectedColor: $selectedColor, number: 15, text: "LONG BREAK", width: width * 0.28)
+                        NumberTextBox(selectedColor: $selectedColor, number: $pomodoroNum, text: "POMODORO", width: width * 0.28)
+                        NumberTextBox(selectedColor: $selectedColor, number: $breakNum, text: "BREAK", width: width * 0.28)
+                        NumberTextBox(selectedColor: $selectedColor, number: $longBreakNum, text: "LONG BREAK", width: width * 0.28)
                     }
                     
                     TitleView(selectedColor: $selectedColor, text: "COLOR THEMES")
 
                     ColorBoxes(selectedColor: $selectedColor)
                     
-                    TitleView(selectedColor: $selectedColor, text: "BREAKS & GOALS")
+                    TitleView(selectedColor: $selectedColor, text: "GOALS")
 
                     HStack(spacing: 20) {
-                        NumberTextBox(selectedColor: $selectedColor, number: 4, text: "POMODOROS UNTIL LONG BREAK", width: width * 0.45)
-                        NumberTextBox(selectedColor: $selectedColor, number: 8, text: "DAILY GOAL", width: width * 0.45)
+                        NumberTextBox(selectedColor: $selectedColor, number: $pomodoroGoal, text: "POMODOROS UNTIL LONG BREAK", width: width * 0.45)
+                        NumberTextBox(selectedColor: $selectedColor, number: $dailyGoal, text: "DAILY GOAL", width: width * 0.45)
                     }
                     
                     TitleView(selectedColor: $selectedColor, text: "SOUND THEMES")
@@ -53,6 +58,8 @@ struct ContentView: View {
 
                 }
             }
+        }.onTapGesture {
+            hideKeyboard()
         }
     }
 }
@@ -63,3 +70,13 @@ struct ContentView_Previews: PreviewProvider {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
+
+

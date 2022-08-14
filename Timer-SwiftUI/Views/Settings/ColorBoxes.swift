@@ -25,7 +25,7 @@ struct ColorBoxes: View {
                     ForEach(0...colorsNum, id: \.self) { color in
                         ZStack {
                             RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(Color("color\(color % colorsNum)"))
+                                .fill(Color("color\(color)"))
                             .frame(width: 55, height: 55)
                             
                             if color == selectedColor {
